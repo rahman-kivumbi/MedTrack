@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="medGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4E95FF" />
+      <stop offset="100%" stop-color="#2563EB" />
+    </linearGradient>
+    <linearGradient id="pillGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="128" fill="#18181B"/>
+  <!-- Cross / Pill icon -->
+  <g transform="translate(256, 256) rotate(-45)">
+    <!-- Pill body half 1 -->
+    <path d="M -90 -160 C -90 -210, -50 -250, 0 -250 C 50 -250, 90 -210, 90 -160 L 90 0 L -90 0 Z" fill="url(#medGrad)"/>
+    <!-- Pill body half 2 -->
+    <path d="M -90 0 L 90 0 L 90 160 C 90 210, 50 250, 0 250 C -50 250, -90 210, -90 160 Z" fill="#F43F5E"/>
+    <!-- Center divider line -->
+    <line x1="-90" y1="0" x2="90" y2="0" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"/>
+    <!-- Inner shine -->
+    <path d="M -50 -180 C -50 -200, -30 -220, 0 -220" stroke="#FFFFFF" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.6"/>
+  </g>
+</svg>

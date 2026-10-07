@@ -1,0 +1,111 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile with display name and email",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "displayName": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 256 },
+        "photoURL": { "type": "string", "maxLength": 1024 },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["userId", "email"]
+    },
+    "UserMedication": {
+      "title": "UserMedication",
+      "description": "A scheduled or on-demand medication tracked by the user",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 128 },
+        "strength": { "type": "string", "maxLength": 64 },
+        "form": { "type": "string", "maxLength": 64 },
+        "dosePerIntake": { "type": "string", "maxLength": 64 },
+        "scheduleType": { "type": "string", "maxLength": 64 },
+        "scheduledTimes": { "type": "array" },
+        "startDate": { "type": "string", "maxLength": 32 },
+        "endDate": { "type": "string", "maxLength": 32 },
+        "notes": { "type": "string", "maxLength": 512 },
+        "archived": { "type": "boolean" },
+        "createdAt": { "type": "number" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["id", "userId", "name", "form", "dosePerIntake", "scheduleType", "startDate"]
+    },
+    "UserDoseLog": {
+      "title": "UserDoseLog",
+      "description": "A record of a scheduled or as-needed medication dose intake",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "medicationId": { "type": "string", "maxLength": 128 },
+        "medicationName": { "type": "string", "maxLength": 128 },
+        "medicationStrength": { "type": "string", "maxLength": 64 },
+        "medicationForm": { "type": "string", "maxLength": 64 },
+        "doseAmount": { "type": "string", "maxLength": 64 },
+        "date": { "type": "string", "maxLength": 32 },
+        "scheduledTime": { "type": "string", "maxLength": 32 },
+        "actualTime": { "type": "string", "maxLength": 64 },
+        "status": { "type": "string", "maxLength": 32 },
+        "isOnDemand": { "type": "boolean" },
+        "notes": { "type": "string", "maxLength": 512 }
+      },
+      "required": ["id", "userId", "medicationId", "medicationName", "date", "status"]
+    },
+    "UserWeightEntry": {
+      "title": "UserWeightEntry",
+      "description": "A user weight measurement log",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "weightKg": { "type": "number" },
+        "date": { "type": "string", "maxLength": 32 },
+        "time": { "type": "string", "maxLength": 32 },
+        "timestamp": { "type": "number" },
+        "notes": { "type": "string", "maxLength": 512 }
+      },
+      "required": ["id", "userId", "weightKg", "date", "time", "timestamp"]
+    },
+    "UserSettingsDoc": {
+      "title": "UserSettingsDoc",
+      "description": "User preferences and targets synced to cloud",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "targetWeightKg": { "type": "number" },
+        "weightUnit": { "type": "string", "maxLength": 16 },
+        "gracePeriodMinutes": { "type": "number" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["userId", "targetWeightKg", "weightUnit"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "User profile document"
+    },
+    "/users/{userId}/medications/{medicationId}": {
+      "schema": { "$ref": "#/entities/UserMedication" },
+      "description": "User personal medications collection"
+    },
+    "/users/{userId}/doseLogs/{doseLogId}": {
+      "schema": { "$ref": "#/entities/UserDoseLog" },
+      "description": "User dose logs collection"
+    },
+    "/users/{userId}/weights/{weightId}": {
+      "schema": { "$ref": "#/entities/UserWeightEntry" },
+      "description": "User weight entries collection"
+    },
+    "/users/{userId}/settings/current": {
+      "schema": { "$ref": "#/entities/UserSettingsDoc" },
+      "description": "User synchronized settings"
+    }
+  }
+}
